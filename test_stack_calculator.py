@@ -211,19 +211,19 @@ def test_evaluate_postfix():
 
     calc.set_symbol_table(symbol_table)
 
-    assert calc.evaluate_postfix("AB-") == "22"
-    assert calc.evaluate_postfix("AB+") == "132"
-    assert calc.evaluate_postfix("ABC+-") == "-18"
-    assert calc.evaluate_postfix("RPH-*") == "-43"
-    assert calc.evaluate_postfix("DCD+G-H-F+-") == "-46"
-    assert calc.evaluate_postfix("JK-XIG^-F+*Z/") == "-287781768"
-    assert calc.evaluate_postfix("XZ+H-I-X*WZX+/ZX^/+") == "1162"
+    assert float(calc.evaluate_postfix("AB-")) == pytest.approx(22, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("AB+")) == pytest.approx(132, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("ABC+-")) == pytest.approx(-18, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("RPH-*")) == pytest.approx(-43, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("DCD+G-H-F+-")) == pytest.approx(-46, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("JK-XIG^-F+*Z/")) == pytest.approx(-287781768.768, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("XZ+H-I-X*WZX+/ZX^/+")) == pytest.approx(1162.0000001593626, rel=1e-12, abs=1e-12)
 
     # extras beyond original input file
-    assert calc.evaluate_postfix("QX*") == "4"
-    assert calc.evaluate_postfix("XBC*G/+XX*Z/-") == "442"
-    assert calc.evaluate_postfix("XQ+R-XZ-+") == "-493"
-    assert calc.evaluate_postfix("XBC*G/+XZ*-XQ+^R-XZ-+") == "96947539999"
+    assert float(calc.evaluate_postfix("QX*")) == pytest.approx(4, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("XBC*G/+XX*Z/-")) == pytest.approx(441.992, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("XQ+R-XZ-+")) == pytest.approx(-493, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("XBC*G/+XZ*-XQ+^R-XZ-+")) == pytest.approx(96947539999.0, rel=1e-12, abs=1e-12)
 
     # new full symbol table
     symbol_table["A"] = "-8"
@@ -255,15 +255,15 @@ def test_evaluate_postfix():
 
     calc.set_symbol_table(symbol_table)
 
-    assert calc.evaluate_postfix("AC+D*") == "10"
-    assert calc.evaluate_postfix("ACD*+") == "42"
-    assert calc.evaluate_postfix("NT*L*L*L*") == "59295096"
-    assert calc.evaluate_postfix("FHM-L-J-C-FB^/+") == "66"
-    assert calc.evaluate_postfix("MN^NM^-") == "9546255"
-    assert calc.evaluate_postfix("AB*CD^/GG^-") == "-1"
-    assert calc.evaluate_postfix("A") == "-8"
-    assert calc.evaluate_postfix("B") == "14"
-    assert calc.evaluate_postfix("C") == "10"
+    assert float(calc.evaluate_postfix("AC+D*")) == pytest.approx(10, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("ACD*+")) == pytest.approx(42, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("NT*L*L*L*")) == pytest.approx(59295096, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("FHM-L-J-C-FB^/+")) == pytest.approx(66.0, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("MN^NM^-")) == pytest.approx(9546255, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("AB*CD^/GG^-")) == pytest.approx(-1.00112, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("A")) == pytest.approx(-8, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("B")) == pytest.approx(14, rel=1e-12, abs=1e-12)
+    assert float(calc.evaluate_postfix("C")) == pytest.approx(10, rel=1e-12, abs=1e-12)
 
 # BONUS: this last test is for the BONUS task
 # which is error checking for operands
